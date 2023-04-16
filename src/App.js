@@ -35,6 +35,47 @@ class App extends Component {
     this.setState({currentUser: newUser})
   }
 
+  async componentDidMount() {
+    let linktoDebitAPI = 'https://johnnylaicode.github.io/api/credits.json';
+    let linktoCreditAPI = 'https://johnnylaicode.github.io/api/debits.json';
+
+    try {
+      let response = await fetch(linktoDebitAPI);
+      if(response.ok) {
+        let data = await response.json();
+        console.log(data);
+        this.setState({debitList: data});
+      } else {
+          console.log('Response error:', response.status);
+      }
+    } catch (error) {
+        console.log('Fetch error:', error.message);
+    }
+
+    const debitAmount = this.state.debitList.map(obj => obj.amount);
+    const debitTotal = Number(debitAmount.reduce((total, amount) => total + amount, 0).toFixed(2));
+    console.log(debitTotal);
+
+    try {
+      let response = await fetch(linktoCreditAPI);
+      if(response.ok) {
+        let data = await response.json();
+        console.log(data);
+        this.setState({creditList: data});
+      } else {
+          console.log('Response error:', response.status);
+      }
+    } catch (error) {
+        console.log('Fetch error:', error.message);
+    }
+
+    const creditAmount = this.state.creditList.map(obj => obj.amount);
+    const creditTotal = Number(creditAmount.reduce((total, amount) => total + amount, 0).toFixed(2));
+    console.log(creditTotal);
+
+    this.setState({accountBalance: Number(creditTotal - debitTotal).toFixed(2)});
+  }
+
   // Create Routes and React elements to be rendered using React components
   render() {  
     // Create React elements and pass input props to components
