@@ -1,7 +1,7 @@
 {
   "name": "bank-of-react",
   "version": "0.1.0",
-  "homepage": "https://johnnylaicode.github.io/bank-of-react-example-code-gh-pages/",
+  "homepage": "https://Ryanj-code.github.io/bank-of-react/",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
@@ -12,14 +12,14 @@
     "react-dom": "^17.0.2",
     "react-router": "^5.2.1",
     "react-router-dom": "^5.3.0",
-    "react-scripts": "4.0.3",
+    "react-scripts": "^5.0.1",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "react-scripts start --openssl-legacy-provider start",
+    "build": "react-scripts build --openssl-legacy-provider build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
