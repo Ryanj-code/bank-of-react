@@ -15,6 +15,17 @@ const Debits = (props) => {
       return <li key={debit.id}>{debit.amount} {debit.description} {date}</li>
     });
   }
+  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const description = e.target.elements.description.value;
+    const amount = e.target.elements.amount.value;
+    console.log(description, amount);
+    console.log(props.addDebit);
+    props.addDebit(description, amount);
+    e.target.reset();
+  }
+
   // Render the list of Debit items and a form to input new Debit item
   return (
     <div>
@@ -22,11 +33,12 @@ const Debits = (props) => {
 
       {debitsView()}
 
-      <form onSubmit={props.addDebit}>
+      <form onSubmit={handleSubmit}>
         <input type="text" name="description" />
         <input type="number" name="amount" />
         <button type="submit">Add Debit</button>
       </form>
+      
       <br/>
       <Link to="/">Return to Home</Link>
     </div>
